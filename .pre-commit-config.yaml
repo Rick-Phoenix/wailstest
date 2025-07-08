@@ -5,8 +5,8 @@ repos:
       - id: gitleaks
   - repo: local
     hooks:
-      - id: oxlint-svelte
-        name: oxlint (Svelte app)
+      - id: oxlint
+        name: oxlint
         entry: oxlint
         language: system
         files: '\.svelte$|\.js$|\.ts$'
