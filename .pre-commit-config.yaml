@@ -7,8 +7,7 @@ repos:
     hooks:
       - id: oxlint-svelte
         name: oxlint (Svelte app)
-        entry: bash -c
+        entry: oxlint
         language: system
         files: '\.svelte$|\.js$|\.ts$'
-        args: ["cd frontend && oxlint"]
         types: [file]

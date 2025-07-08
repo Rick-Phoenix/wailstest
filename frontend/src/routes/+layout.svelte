@@ -3,7 +3,7 @@
 
   let { children } = $props();
   const a = 1;
-  a = 2;
+  a = 3;
 </script>
 
 {@render children()}
