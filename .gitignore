@@ -1,16 +1,14 @@
+# Caches
 .task
-bin
-build/windows/nsis/MicrosoftEdgeWebview2Setup.exe
-llms.txt
-llms-medium.txt
-
-generated
-output
-bindings
-
-node_modules
+.cache 
+.moon/cache
+.moon/docker
 
 # Output
+out
+*.js.map
+*.d.ts 
+*.tsbuildInfo
 .output
 .vercel
 .netlify
@@ -18,11 +16,21 @@ node_modules
 .svelte-kit
 dist
 build/**
+
+# Wails
+build/windows/nsis/MicrosoftEdgeWebview2Setup.exe
+bin
+generated
+output
+bindings
 !build/**/*.yml
 
-# OS
-.DS_Store
-Thumbs.db
+# Llm files
+llms.txt
+llms-medium.txt
+
+# Node modules
+node_modules
 
 # Env
 .env
@@ -30,6 +38,25 @@ Thumbs.db
 !.env.example
 !.env.test
 
-# Vite
+# Temporary Files
+*.tmp
+*.swp
+*.swo
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
+
+# Logs
+logs/
+*.log
+pnpm-debug.log*
+
+# Operating System Generated Files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Test Reports & Coverage
+coverage/
+lcov-report/
+*.lcov
+.nyc_output/
