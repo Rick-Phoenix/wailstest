@@ -2,6 +2,7 @@
 bin
 build/windows/nsis/MicrosoftEdgeWebview2Setup.exe
 llms.txt
+llms-medium.txt
 
 generated
 output

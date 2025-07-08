@@ -3,3 +3,12 @@ repos:
     rev: v8.27.2
     hooks:
       - id: gitleaks
+  - repo: local
+    hooks:
+      - id: oxlint-svelte
+        name: oxlint (Svelte app)
+        entry: bash -c
+        language: system
+        files: '\.svelte$|\.js$|\.ts$'
+        args: ["cd svelte-app-dir && oxlint"]
+        types: [file]
