@@ -3,6 +3,10 @@ bin
 build/windows/nsis/MicrosoftEdgeWebview2Setup.exe
 llms.txt
 
+generated
+output
+bindings
+
 node_modules
 
 # Output
