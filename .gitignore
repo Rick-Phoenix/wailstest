@@ -17,7 +17,8 @@ node_modules
 .wrangler
 .svelte-kit
 dist
-build
+build/**
+!build/**/*.yml
 
 # OS
 .DS_Store
