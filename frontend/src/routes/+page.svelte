@@ -37,7 +37,7 @@
   <div class="card">
     <div class="input-box">
       <input class="input" bind:value={name} type="text" autocomplete="off" />
-      <button class="btn" on:click={doGreet}>Greet</button>
+      <button class="btn" onclick={doGreet}>Greet</button>
     </div>
   </div>
   <div class="footer">
