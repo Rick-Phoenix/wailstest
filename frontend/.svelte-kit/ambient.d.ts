@@ -74,6 +74,7 @@ declare module '$env/static/private' {
 	export const PULSE_SERVER: string;
 	export const npm_config_prefix: string;
 	export const npm_config_npm_version: string;
+	export const LG_CONFIG_FILE: string;
 	export const GOMODCACHE: string;
 	export const ATUIN_HISTORY_ID: string;
 	export const FLOAX_TEXT_COLOR: string;
@@ -220,6 +221,7 @@ declare module '$env/dynamic/private' {
 		PULSE_SERVER: string;
 		npm_config_prefix: string;
 		npm_config_npm_version: string;
+		LG_CONFIG_FILE: string;
 		GOMODCACHE: string;
 		ATUIN_HISTORY_ID: string;
 		FLOAX_TEXT_COLOR: string;
