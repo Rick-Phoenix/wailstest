@@ -10,5 +10,5 @@ repos:
         entry: bash -c
         language: system
         files: '\.svelte$|\.js$|\.ts$'
-        args: ["cd svelte-app-dir && oxlint"]
+        args: ["cd frontend && oxlint"]
         types: [file]
