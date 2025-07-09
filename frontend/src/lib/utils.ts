@@ -5,37 +5,63 @@ export function cn(...inputs: ClassValue[]): string {
   return twMerge(clsx(inputs));
 }
 
-type ClassDictionary = Record<string, string[] | string>;
+type ClassDictionary = Record<
+  string,
+  string[] | string | { [key: string]: ClassDictionary }
+>;
 
-function getClassName(prefix: string, value: string): string {
-  if (prefix.startsWith("%")) {
-    return value;
+function getPrefix(rawPrefix: string): string {
+  if (rawPrefix === "" || rawPrefix.startsWith("%")) {
+    return "";
   }
 
-  return prefix + value;
+  if (!rawPrefix.startsWith("[[") && !rawPrefix.endsWith(":")) {
+    return rawPrefix + ":";
+  }
+
+  return rawPrefix;
 }
 
-export function cp(dict: ClassDictionary): string[] {
-  const pairs = Object.entries(dict);
-
+function recursiveGetClass(classItem: ClassItem, prefix = ""): string[] {
   const classes: string[] = [];
-
-  for (const [prefix, value] of pairs) {
-    if (typeof value === "string") {
-      classes.push(getClassName(prefix, value));
-    } else if (Array.isArray(value)) {
-      for (const suffix of value) {
-        classes.push(getClassName(prefix, suffix));
-      }
+  const parsedPrefix = getPrefix(prefix);
+  if (typeof classItem === "string") {
+    classes.push(parsedPrefix + classItem);
+  } else if (Array.isArray(classItem)) {
+    for (const suffix of classItem) {
+      classes.push(parsedPrefix + suffix);
+    }
+  } else {
+    const pairs = Object.entries(classItem);
+    for (const [key, val] of pairs) {
+      classes.push(...recursiveGetClass(val, parsedPrefix + key));
     }
   }
 
   return classes;
 }
 
-export function fcp(dict: ClassDictionary): string {
-  const classes = cp(dict);
-  return classes.join(" ");
+type ClassItem = ClassDictionary | string | string[] | {
+  [key: string]: ClassDictionary;
+};
+
+export function cp(...classes: ClassItem[]): string[] {
+  const output: string[] = [];
+
+  for (const classItem of classes) {
+    output.push(...recursiveGetClass(classItem));
+  }
+
+  return output;
+}
+
+export function fcp(...classes: ClassItem[]): string {
+  const output: string[] = [];
+
+  for (const classItem of classes) {
+    output.push(...cp(classItem));
+  }
+  return output.join(" ");
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
