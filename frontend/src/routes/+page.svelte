@@ -2,9 +2,9 @@
   import { GreetService } from "../../bindings/changeme";
   import { Events } from "@wailsio/runtime";
 
-  let name: string = "";
-  let result: string = "Please enter your name below 👇";
-  let time: string = "Listening for Time event...";
+  let name = $state("");
+  let result = $state("Please enter your name below 👇");
+  let time = $state("Listening for Time event...");
 
   const doGreet = (): void => {
     let localName = name;
@@ -23,8 +23,8 @@
   });
 </script>
 
-<div class="container">
-  <div>
+<div class="flex-col-center size-full">
+  <div class="flex h-min">
     <span data-wml-openURL="https://wails.io">
       <img src="/wails.png" class="logo" alt="Wails logo" />
     </span>
@@ -41,9 +41,10 @@
     </div>
   </div>
   <div class="footer">
-    <div><p>Click on the Wails logo to learn more</p></div>
+    <div><p class="text-2xl">Click on the Wails logo to learn more</p></div>
     <div><p>{time}</p></div>
   </div>
+  <a href="/about">Go to the about page...</a>
 </div>
 
 <style>

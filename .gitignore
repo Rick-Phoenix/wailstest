@@ -26,8 +26,7 @@ bindings
 !build/**/*.yml
 
 # Llm files
-llms.txt
-llms-medium.txt
+llm*.txt
 
 # Node modules
 node_modules
