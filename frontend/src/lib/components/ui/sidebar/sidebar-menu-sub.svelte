@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { cn, type WithElementRef } from "$lib/utils.js";
+  import { fcd, type WithElementRef } from "$lib/utils.js";
   import type { HTMLAttributes } from "svelte/elements";
 
   let {
@@ -14,11 +14,12 @@
   bind:this={ref}
   data-slot="sidebar-menu-sub"
   data-sidebar="menu-sub"
-  class={cn(
-    "border-sidebar-border mx-3.5 min-w-0 translate-x-px flex-col gap-1 border-l px-2.5 py-0.5",
-    "group-data-[collapsible=icon]:hidden",
-    className,
-  )}
+  class={fcd({
+    "%border": "border-l border-sidebar-border",
+    "%spacing": "mx-3.5 gap-1 px-2.5 py-0.5",
+    "%":
+      "min-w-0 translate-x-px flex-col group-data-[collapsible=icon]:hidden",
+  }, className)}
   {...restProps}
 >
   {@render children?.()}

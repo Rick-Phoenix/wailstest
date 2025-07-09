@@ -7,7 +7,10 @@ export function cn(...inputs: ClassValue[]): string {
 
 type ClassDictionary = Record<
   string,
-  string[] | string | { [key: string]: ClassItem } | Boolean
+  | string[]
+  | string
+  | { [key: string]: ClassItem }
+  | Boolean
 >;
 
 function getClassName(prefix: string, suffix: string): string {

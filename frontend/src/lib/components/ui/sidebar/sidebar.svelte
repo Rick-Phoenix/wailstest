@@ -1,6 +1,6 @@
 <script lang="ts">
   import * as Sheet from "$lib/components/ui/sheet/index.js";
-  import { cn, fcd, type WithElementRef } from "$lib/utils.js";
+  import { cd, cn, fcd, type WithElementRef } from "$lib/utils.js";
   import type { HTMLAttributes } from "svelte/elements";
   import { SIDEBAR_WIDTH_MOBILE } from "./constants.js";
   import { useSidebar } from "./context.svelte.js";
@@ -24,6 +24,20 @@
 
   const isFloatingOrInset = variant === "floating" || variant === "inset";
   const sidebarState = useSidebar();
+
+  console.log(cd({
+    "group-data-": {
+      "[collapsible=icon]": isFloatingOrInset
+        ? "w-[calc(var(--sidebar-width-icon)+(--spacing(4))+2px)]"
+        : "w-(--sidebar-width-icon)",
+      "[collapsible=offcanvas]": "w-0",
+      "[side=right]": "rotate-180",
+    },
+    "%": [
+      "w-(--sidebar-width) relative bg-transparent",
+    ],
+    "%transitions": ["transition-[width] duration-200 ease-linear"],
+  }));
 </script>
 
 {#if collapsible === "none"}
@@ -74,15 +88,16 @@
       data-slot="sidebar-gap"
       class={fcd({
         "group-data-": {
-          "[collapsible=icon]": variant === "floating" || variant === "inset"
+          "[collapsible=icon]": isFloatingOrInset
             ? "w-[calc(var(--sidebar-width-icon)+(--spacing(4))+2px)]"
             : "w-(--sidebar-width-icon)",
           "[collapsible=offcanvas]": "w-0",
           "[side=right]": "rotate-180",
         },
         "%": [
-          "w-(--sidebar-width) relative bg-transparent transition-[width] duration-200 ease-linear",
+          "w-(--sidebar-width) relative bg-transparent",
         ],
+        "%transitions": ["transition-[width] duration-200 ease-linear"],
       })}
     >
     </div>
