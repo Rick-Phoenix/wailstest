@@ -7,34 +7,39 @@ export function cn(...inputs: ClassValue[]): string {
 
 type ClassDictionary = Record<
   string,
-  string[] | string | { [key: string]: ClassDictionary }
+  string[] | string | { [key: string]: ClassItem }
 >;
 
-function getPrefix(rawPrefix: string): string {
-  if (rawPrefix === "" || rawPrefix.startsWith("%")) {
-    return "";
+function getClassName(prefix: string, suffix: string): string {
+  if (prefix.startsWith("%")) {
+    return suffix;
   }
 
-  if (!rawPrefix.startsWith("[[") && !rawPrefix.endsWith(":")) {
-    return rawPrefix + ":";
+  if (suffix.startsWith("%")) {
+    return prefix;
   }
 
-  return rawPrefix;
+  if (
+    !suffix.startsWith("[") && !prefix.endsWith(":") && !prefix.endsWith("-")
+  ) {
+    return prefix + ":" + suffix;
+  }
+
+  return prefix + suffix;
 }
 
 function recursiveGetClass(classItem: ClassItem, prefix = ""): string[] {
   const classes: string[] = [];
-  const parsedPrefix = getPrefix(prefix);
   if (typeof classItem === "string") {
-    classes.push(parsedPrefix + classItem);
+    classes.push(getClassName(prefix, classItem));
   } else if (Array.isArray(classItem)) {
     for (const suffix of classItem) {
-      classes.push(parsedPrefix + suffix);
+      classes.push(getClassName(prefix, suffix));
     }
   } else {
     const pairs = Object.entries(classItem);
     for (const [key, val] of pairs) {
-      classes.push(...recursiveGetClass(val, parsedPrefix + key));
+      classes.push(...recursiveGetClass(val, getClassName(prefix, key)));
     }
   }
 
@@ -45,22 +50,19 @@ type ClassItem = ClassDictionary | string | string[] | {
   [key: string]: ClassDictionary;
 };
 
-export function cp(...classes: ClassItem[]): string[] {
+export function cp(dict: ClassDictionary): string[] {
+  const entries = Object.entries(dict);
   const output: string[] = [];
 
-  for (const classItem of classes) {
-    output.push(...recursiveGetClass(classItem));
+  for (const [prefix, entry] of entries) {
+    output.push(...recursiveGetClass(entry, prefix));
   }
 
   return output;
 }
 
-export function fcp(...classes: ClassItem[]): string {
-  const output: string[] = [];
-
-  for (const classItem of classes) {
-    output.push(...cp(classItem));
-  }
+export function fcp(dict: ClassDictionary): string {
+  const output = cp(dict);
   return output.join(" ");
 }
 
