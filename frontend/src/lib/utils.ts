@@ -7,10 +7,14 @@ export function cn(...inputs: ClassValue[]): string {
 
 type ClassDictionary = Record<
   string,
-  string[] | string | { [key: string]: ClassItem }
+  string[] | string | { [key: string]: ClassItem } | Boolean
 >;
 
 function getClassName(prefix: string, suffix: string): string {
+  if (suffix === "") {
+    return "";
+  }
+
   if (prefix.startsWith("%")) {
     return suffix;
   }
@@ -30,13 +34,16 @@ function getClassName(prefix: string, suffix: string): string {
 
 function recursiveGetClass(classItem: ClassItem, prefix = ""): string[] {
   const classes: string[] = [];
+
   if (typeof classItem === "string") {
     classes.push(getClassName(prefix, classItem));
   } else if (Array.isArray(classItem)) {
     for (const suffix of classItem) {
       classes.push(getClassName(prefix, suffix));
     }
-  } else {
+  } else if (classItem === true) {
+    classes.push(prefix);
+  } else if (typeof classItem === "object" && classItem) {
     const pairs = Object.entries(classItem);
     for (const [key, val] of pairs) {
       classes.push(...recursiveGetClass(val, getClassName(prefix, key)));
@@ -46,11 +53,9 @@ function recursiveGetClass(classItem: ClassItem, prefix = ""): string[] {
   return classes;
 }
 
-type ClassItem = ClassDictionary | string | string[] | {
-  [key: string]: ClassDictionary;
-};
+type ClassItem = ClassDictionary[string];
 
-export function cp(dict: ClassDictionary): string[] {
+export function cd(dict: ClassDictionary, ...flatOpts: string[]): string[] {
   const entries = Object.entries(dict);
   const output: string[] = [];
 
@@ -58,12 +63,19 @@ export function cp(dict: ClassDictionary): string[] {
     output.push(...recursiveGetClass(entry, prefix));
   }
 
+  if (flatOpts) {
+    output.push(...flatOpts);
+  }
+
   return output;
 }
 
-export function fcp(dict: ClassDictionary): string {
-  const output = cp(dict);
-  return output.join(" ");
+export function fcd(dict: ClassDictionary, ...flatOpts: ClassValue[]): string {
+  return twMerge(cd(dict), clsx(flatOpts));
+}
+
+export function fcc(callback: () => ClassDictionary) {
+  return fcd(callback());
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
