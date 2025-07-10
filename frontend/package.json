@@ -17,6 +17,8 @@
     "mode-watcher": "^1.1.0"
   },
   "devDependencies": {
+    "@iconify-json/lucide": "^1.2.57",
+    "@iconify/tailwind4": "^1.0.6",
     "@internationalized/date": "^3.8.2",
     "@lucide/svelte": "^0.515.0",
     "@sveltejs/adapter-static": "^3.0.8",
@@ -28,6 +30,7 @@
     "@vitest/browser": "^3.2.4",
     "bits-ui": "^2.8.10",
     "clsx": "^2.1.1",
+    "daisyui": "^5.0.46",
     "playwright": "^1.53.2",
     "svelte": "^5.0.0",
     "svelte-check": "^4.0.0",
