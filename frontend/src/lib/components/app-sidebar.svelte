@@ -2,6 +2,8 @@
   import HouseIcon from "@lucide/svelte/icons/house";
   import SettingsIcon from "@lucide/svelte/icons/settings";
   import * as Sidebar from "$lib/components/ui/sidebar/index.js";
+  import Button from "./ui/button/button.svelte";
+  import SidebarFooterMenu from "./sidebar-footer-menu.svelte";
 
   const items = [
     {
@@ -21,9 +23,12 @@
   variant="inset"
   collapsible="icon"
 >
+  <Sidebar.Header>
+    Header
+  </Sidebar.Header>
   <Sidebar.Content>
     <Sidebar.Group>
-      <Sidebar.GroupLabel>Application</Sidebar.GroupLabel>
+      <Sidebar.GroupLabel>Group</Sidebar.GroupLabel>
       <Sidebar.GroupContent>
         <Sidebar.Menu>
           {#each items as item (item.title)}
@@ -42,4 +47,15 @@
       </Sidebar.GroupContent>
     </Sidebar.Group>
   </Sidebar.Content>
+  <Sidebar.Footer class="flex justify-between">
+    <SidebarFooterMenu />
+    <Button
+      variant="ghost"
+      size="icon"
+      class="rounded-2xl"
+      href={"/settings"}
+    >
+      <SettingsIcon />
+    </Button>
+  </Sidebar.Footer>
 </Sidebar.Root>

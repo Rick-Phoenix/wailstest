@@ -1,5 +1,6 @@
 <script lang="ts" module>
   import { tv, type VariantProps } from "tailwind-variants";
+  import { fcd } from "$lib/utils.js";
 
   export const sidebarMenuButtonVariants = tv({
     base: fcd(
@@ -97,7 +98,6 @@
   import * as Tooltip from "$lib/components/ui/tooltip/index.js";
   import {
     cn,
-    fcd,
     type WithElementRef,
     type WithoutChildrenOrChild,
   } from "$lib/utils.js";
