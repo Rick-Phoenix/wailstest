@@ -37,7 +37,6 @@
       </Breadcrumb.Root>
     </header>
     <main>
-      <Sidebar.Trigger />
       {@render children?.()}
     </main>
   </Sidebar.Inset>
