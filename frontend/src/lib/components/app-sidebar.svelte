@@ -10,8 +10,8 @@
       icon: HouseIcon,
     },
     {
-      title: "About",
-      url: "/about",
+      title: "Settings",
+      url: "/settings",
       icon: InboxIcon,
     },
   ];

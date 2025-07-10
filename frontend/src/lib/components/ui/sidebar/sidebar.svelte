@@ -20,7 +20,7 @@
   } = $props();
 
   const isFloatingOrInset = variant === "floating" || variant === "inset";
-  const sidebar = useSidebar();
+  const sidebarState = useSidebar();
 </script>
 
 {#if collapsible === "none"}
@@ -34,9 +34,9 @@
   >
     {@render children?.()}
   </div>
-{:else if sidebar.isMobile}
+{:else if sidebarState.isMobile}
   <Sheet.Root
-    bind:open={() => sidebar.openMobile, (v) => sidebar.setOpenMobile(v)}
+    bind:open={() => sidebarState.openMobile, (v) => sidebarState.setOpenMobile(v)}
     {...restProps}
   >
     <Sheet.Content
@@ -59,12 +59,23 @@
 {:else}
   <div
     bind:this={ref}
+    role="navigation"
     class="text-sidebar-foreground group peer hidden md:block"
-    data-state={sidebar.state}
-    data-collapsible={sidebar.state === "collapsed" ? collapsible : ""}
+    data-state={sidebarState.state}
+    data-collapsible={sidebarState.state === "collapsed" ? collapsible : ""}
     data-variant={variant}
     data-side={side}
     data-slot="sidebar"
+    onmouseenter={() => {
+      if (sidebarState.openOnHover) {
+        sidebarState.setOpen(true);
+      }
+    }}
+    onmouseleave={() => {
+      if (sidebarState.openOnHover) {
+        sidebarState.setOpen(false);
+      }
+    }}
   >
     <!-- This is what handles the sidebar gap on desktop -->
     <div

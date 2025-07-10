@@ -13,6 +13,7 @@
   let {
     ref = $bindable(null),
     open = $bindable(true),
+    openOnHover = $bindable(false),
     onOpenChange = () => {},
     class: className,
     style,
@@ -21,9 +22,11 @@
   }: WithElementRef<HTMLAttributes<HTMLDivElement>> & {
     open?: boolean;
     onOpenChange?: (open: boolean) => void;
+    openOnHover?: boolean;
   } = $props();
 
   const sidebar = setSidebar({
+    openOnHover: () => openOnHover,
     open: () => open,
     setOpen: (value: boolean) => {
       open = value;
