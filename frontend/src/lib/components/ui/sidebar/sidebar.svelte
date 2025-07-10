@@ -116,7 +116,10 @@
             "[side=right]": isFloatingOrInset ? "border-l" : "",
           },
           "p-2": isFloatingOrInset,
-          "%": [side === "left" ? "left-0" : "right-0"],
+          "%": [
+            side === "left" ? "left-0" : "right-0",
+            "w-(--sidebar-width) fixed inset-y-0 z-10 hidden h-svh transition-[left,right,width] duration-200 ease-linear md:flex",
+          ],
         }, className),
       ]}
     >
