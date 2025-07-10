@@ -21,7 +21,6 @@ var assets embed.FS
 // and starts a goroutine that emits a time-based event every second. It subsequently runs the application and
 // logs any error that might occur.
 func main() {
-
 	// Create a new Wails application by providing the necessary options.
 	// Variables 'Name' and 'Description' are for application metadata.
 	// 'Assets' configures the asset server with the 'FS' variable pointing to the frontend files.
@@ -47,7 +46,9 @@ func main() {
 	// 'BackgroundColour' is the background colour of the window.
 	// 'URL' is the URL that will be loaded into the webview.
 	app.Window.NewWithOptions(application.WebviewWindowOptions{
-		Title: "Window 1",
+		Title:     "Window 1",
+		MinWidth:  1200,
+		MinHeight: 800,
 		Mac: application.MacWindow{
 			InvisibleTitleBarHeight: 50,
 			Backdrop:                application.MacBackdropTranslucent,
@@ -69,7 +70,6 @@ func main() {
 
 	// Run the application. This blocks until the application has been exited.
 	err := app.Run()
-
 	// If an error occurred while running the application, log it and exit.
 	if err != nil {
 		log.Fatal(err)
