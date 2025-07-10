@@ -6,12 +6,17 @@
   import type { Side } from "$lib/components/ui/sidebar/context.svelte";
   import Separator from "$lib/components/ui/separator/separator.svelte";
   import * as Breadcrumb from "$lib/components/ui/breadcrumb/index.js";
+  import { Toaster } from "svelte-french-toast";
 
   let { children } = $props();
   let sidebarSide = $state<Side>("left");
 </script>
 
 <ModeWatcher defaultTheme="dark" />
+<Toaster
+  position="top-left"
+  toastOptions={{ style: "background: var(--background); color: var(--primary)" }}
+/>
 <Sidebar.Provider bind:side={sidebarSide}>
   <AppSidebar />
   <Sidebar.Inset>

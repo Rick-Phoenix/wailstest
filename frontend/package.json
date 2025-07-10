@@ -14,7 +14,8 @@
   },
   "dependencies": {
     "@wailsio/runtime": "latest",
-    "mode-watcher": "^1.1.0"
+    "mode-watcher": "^1.1.0",
+    "svelte-french-toast": "^1.2.0"
   },
   "devDependencies": {
     "@iconify-json/lucide": "^1.2.57",
