@@ -2,19 +2,16 @@
   import HouseIcon from "@lucide/svelte/icons/house";
   import InboxIcon from "@lucide/svelte/icons/inbox";
   import * as Sidebar from "$lib/components/ui/sidebar/index.js";
-  import { useSidebar } from "$lib/components/ui/sidebar/index.js";
-
-  const sidebar = useSidebar();
 
   const items = [
     {
       title: "Home",
-      url: "#",
+      url: "/",
       icon: HouseIcon,
     },
     {
-      title: "Inbox",
-      url: "#",
+      title: "About",
+      url: "/about",
       icon: InboxIcon,
     },
   ];
@@ -23,12 +20,7 @@
 <Sidebar.Root
   variant="inset"
   collapsible="icon"
-  onmouseenter={() => {
-    sidebar.setOpen(true);
-  }}
-  onmouseleave={() => {
-    sidebar.setOpen(false);
-  }}
+  openOnHover={true}
 >
   <Sidebar.Content>
     <Sidebar.Group>
