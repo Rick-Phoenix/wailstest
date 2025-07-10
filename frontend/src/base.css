@@ -34,20 +34,23 @@
   /* Section -- Typography */
 
   h1 {
-    @apply scroll-m-20 text-4xl font-extrabold tracking-tight;
+    @apply scroll-m-20 mb-1 text-3xl;
   }
 
   h2 {
-    @apply scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight
-      transition-colors first:mt-0;
+    @apply scroll-m-20 pb-1 text-2xl font-semibold transition-colors first:mt-0;
   }
 
   h3 {
-    @apply scroll-m-20 text-2xl font-semibold tracking-tight;
+    @apply scroll-m-20 text-xl pb-1 font-semibold;
   }
 
   h4 {
-    @apply scroll-m-20 text-xl font-semibold tracking-tight;
+    @apply scroll-m-20 text-lg pb-1 font-semibold;
+  }
+
+  h5 {
+    @apply scroll-m-20 pb-1 font-semibold;
   }
 
   p {
