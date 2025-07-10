@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { cn, type WithElementRef } from "$lib/utils.js";
+  import { fcd, type WithElementRef } from "$lib/utils.js";
   import type { HTMLAttributes } from "svelte/elements";
 
   let {
@@ -15,7 +15,9 @@
   bind:this={ref}
   data-slot="sidebar-menu"
   data-sidebar="menu"
-  class={cn("w-full min-w-0 flex-col gap-1", className)}
+  class={fcd({
+    "layout": "flex w-full min-w-0 flex-col gap-1",
+  }, className)}
   {...restProps}
 >
   {@render children?.()}

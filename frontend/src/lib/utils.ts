@@ -7,64 +7,34 @@ export function cn(...inputs: ClassValue[]): string {
 
 type ClassDictionary = Record<
   string,
-  | string[]
-  | string
-  | { [key: string]: ClassItem }
-  | Boolean
+  ClassItem
 >;
 
-function getClassName(prefix: string, suffix: string): string {
-  if (suffix === "") {
-    return "";
-  }
+type ClassItem = string | string[] | Boolean | { [key: string]: ClassItem };
 
-  if (prefix.startsWith("%")) {
-    return suffix;
-  }
-
-  if (suffix.startsWith("%")) {
-    return prefix;
-  }
-
-  if (
-    !suffix.startsWith("[") && !prefix.endsWith(":") && !prefix.endsWith("-")
-  ) {
-    return prefix + ":" + suffix;
-  }
-
-  return prefix + suffix;
-}
-
-function recursiveGetClass(classItem: ClassItem, prefix = ""): string[] {
+function recursiveGetClass(dict: ClassDictionary): string[] {
   const classes: string[] = [];
 
-  if (typeof classItem === "string") {
-    classes.push(getClassName(prefix, classItem));
-  } else if (Array.isArray(classItem)) {
-    for (const suffix of classItem) {
-      classes.push(getClassName(prefix, suffix));
-    }
-  } else if (classItem === true) {
-    classes.push(prefix);
-  } else if (typeof classItem === "object" && classItem) {
-    const pairs = Object.entries(classItem);
-    for (const [key, val] of pairs) {
-      classes.push(...recursiveGetClass(val, getClassName(prefix, key)));
+  const pairs = Object.entries(dict);
+  for (const [key, val] of pairs) {
+    if (val === true) {
+      classes.push(key);
+    } else if (typeof val === "string") {
+      classes.push(val);
+    } else if (Array.isArray(val)) {
+      for (const item of val) {
+        classes.push(item);
+      }
+    } else if (typeof val === "object" && val) {
+      classes.push(...recursiveGetClass(val as { [key: string]: ClassItem }));
     }
   }
 
   return classes;
 }
 
-type ClassItem = ClassDictionary[string];
-
 export function cd(dict: ClassDictionary, ...flatOpts: string[]): string[] {
-  const entries = Object.entries(dict);
-  const output: string[] = [];
-
-  for (const [prefix, entry] of entries) {
-    output.push(...recursiveGetClass(entry, prefix));
-  }
+  const output = recursiveGetClass(dict);
 
   if (flatOpts) {
     output.push(...flatOpts);

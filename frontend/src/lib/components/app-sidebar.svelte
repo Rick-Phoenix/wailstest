@@ -20,7 +20,6 @@
 <Sidebar.Root
   variant="inset"
   collapsible="icon"
-  openOnHover={true}
 >
   <Sidebar.Content>
     <Sidebar.Group>

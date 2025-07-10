@@ -2,74 +2,75 @@
   import { tv, type VariantProps } from "tailwind-variants";
 
   export const sidebarMenuButtonVariants = tv({
-    base: fcd({
-      "[&>svg]": [
-        "size-4",
-        "shrink-0",
-      ],
-      "hover": [
-        "bg-sidebar-accent",
-        "text-sidebar-accent-foreground",
-      ],
-      "active": [
-        "bg-sidebar-accent",
-        "text-sidebar-accent-foreground",
-      ],
-      "data-": {
-        "[active=true]": [
-          "bg-sidebar-accent",
-          "text-sidebar-accent-foreground",
-          "font-medium",
+    base: fcd(
+      {
+        "hover": [
+          "hover:bg-sidebar-accent",
+          "hover:text-sidebar-accent-foreground",
         ],
-        "[state=open]": {
-          "hover": [
-            "bg-sidebar-accent",
-            "text-sidebar-accent-foreground",
-          ],
-        },
+        "active": [
+          "active:bg-sidebar-accent",
+          "active:text-sidebar-accent-foreground",
+          "data-[state=open]:hover:text-sidebar-accent-foreground",
+          "data-[state=open]:hover:bg-sidebar-accent",
+          "data-[active=true]:bg-sidebar-accent",
+        ],
+        "border": [
+          "rounded-md",
+          "outline-hidden",
+          "ring-sidebar-ring",
+          "focus-visible:ring-2",
+        ],
+        "disabled": [
+          "disabled:pointer-events-none",
+          "disabled:opacity-50",
+          "aria-disabled:pointer-events-none",
+          "aria-disabled:opacity-50",
+        ],
+        "svg": [
+          "[&>svg]:shrink-0",
+          "[&>svg]:size-4",
+        ],
+        "collapsible": [
+          "group-data-[collapsible=icon]:size-8!",
+          "group-data-[collapsible=icon]:p-2!",
+        ],
+
+        "text": [
+          "text-left",
+          "text-sm",
+          "data-[active=true]:font-medium",
+          "data-[active=true]:text-sidebar-accent-foreground",
+        ],
+        "peer": "peer/menu-button",
+        "layout": [
+          "flex",
+          "w-full",
+          "items-center",
+          "gap-2",
+          "p-2",
+          "overflow-hidden",
+        ],
+        "transition": "transition-[width,height,padding]",
+        "last-child": "[&>span:last-child]:truncate",
+        "sidebar-menu-action":
+          "group-has-data-[sidebar=menu-action]/menu-item:pr-8",
       },
-      "group-data-": {
-        "[collapsible=icon]": "size-8! p-2!",
-      },
-      "disabled": [
-        "pointer-events-none",
-        "opacity-50",
-      ],
-      "aria-disabled": [
-        "pointer-events-none",
-        "opacity-50",
-      ],
-      "group-has-data-[sidebar=menu-action]/menu-item": "pr-8",
-      "%spacing": "p-2 gap-2",
-      "%text": "text-left text-sm",
-      "%border": [
-        "outline-hidden",
-        "ring-sidebar-ring",
-        "focus-visible:ring-2",
-        "rounded-md",
-      ],
-      "%layout": "flex w-full items-center",
-      "%visibility": [
-        "overflow-hidden",
-        "[&>span:last-child]:truncate",
-      ],
-      "%": "peer/menu-button transition-[width,height,padding]",
-    }),
+    ),
     variants: {
       variant: {
-        default: fcd({
-          "hover": [
-            "bg-sidebar-accent",
-            "text-sidebar-accent-foreground",
-          ],
-        }),
+        default:
+          "hover:bg-sidebar-accent hover:text-sidebar-accent-foreground",
         outline: fcd({
-          "hover": {
-            "bg-": "sidebar-accent",
-            "text-": "sidebar-accent-foreground",
-            "shadow-": "[0_0_0_1px_var(--sidebar-accent)]",
-          },
-          "shadow-": "[0_0_0_1px_var(--sidebar-border)]",
+          "bg": "bg-background",
+          "hover": [
+            "hover:bg-sidebar-accent",
+            "hover:text-sidebar-accent-foreground",
+          ],
+          "shadow": [
+            "shadow-[0_0_0_1px_var(--sidebar-border)]",
+            "hover:shadow-[0_0_0_1px_var(--sidebar-accent)]",
+          ],
         }),
       },
       size: {

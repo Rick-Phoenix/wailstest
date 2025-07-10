@@ -15,10 +15,13 @@
   data-slot="sidebar-menu-sub"
   data-sidebar="menu-sub"
   class={fcd({
-    "%border": "border-l border-sidebar-border",
-    "%spacing": "mx-3.5 gap-1 px-2.5 py-0.5",
-    "%":
-      "min-w-0 translate-x-px flex-col group-data-[collapsible=icon]:hidden",
+    "border": [
+      "border-sidebar-border",
+      "border-l",
+    ],
+    "collapsible": "group-data-[collapsible=icon]:hidden",
+    "layout": "min-w-0 translate-x-px flex-col",
+    "spacing": "mx-3.5 gap-1 px-2.5 py-0.5",
   }, className)}
   {...restProps}
 >
