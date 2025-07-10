@@ -20,6 +20,7 @@
 <Sidebar.Root
   variant="inset"
   collapsible="icon"
+  side="left"
 >
   <Sidebar.Content>
     <Sidebar.Group>
