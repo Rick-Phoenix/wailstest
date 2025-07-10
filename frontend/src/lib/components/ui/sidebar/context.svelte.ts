@@ -4,6 +4,8 @@ import { SIDEBAR_KEYBOARD_SHORTCUT } from "./constants.js";
 
 type Getter<T> = () => T;
 
+export type Side = "left" | "right";
+
 export type SidebarStateProps = {
   /**
    * A getter function that returns the current open state of the sidebar.
@@ -20,6 +22,8 @@ export type SidebarStateProps = {
   setOpen: (open: boolean) => void;
 
   openOnHover: Getter<boolean>;
+
+  side: Getter<Side>;
 };
 
 class SidebarState {
@@ -27,6 +31,7 @@ class SidebarState {
   open = $derived.by(() => this.props.open());
   openOnHover = $derived.by(() => this.props.openOnHover());
   openMobile = $state(false);
+  side = $derived.by(() => this.props.side());
   setOpen: SidebarStateProps["setOpen"];
   #isMobile: IsMobile;
   state = $derived.by(() => (this.open ? "expanded" : "collapsed"));
@@ -45,6 +50,10 @@ class SidebarState {
 
   toggleOpenOnHover = () => {
     this.openOnHover = !this.openOnHover;
+  };
+
+  setSide = (val: Side) => {
+    this.side = val;
   };
 
   setOpenOnHover = (val: boolean) => {

@@ -8,12 +8,14 @@
     SIDEBAR_WIDTH,
     SIDEBAR_WIDTH_ICON,
   } from "./constants.js";
-  import { setSidebar } from "./context.svelte.js";
+  import { setSidebar, type Side } from "./context.svelte.js";
+
 
   let {
     ref = $bindable(null),
     open = $bindable(true),
     openOnHover = $bindable(false),
+    side = $bindable<Side>("left"),
     onOpenChange = () => {},
     class: className,
     style,
@@ -23,9 +25,11 @@
     open?: boolean;
     onOpenChange?: (open: boolean) => void;
     openOnHover?: boolean;
+    side?: Side;
   } = $props();
 
   const sidebar = setSidebar({
+    side: () => side,
     openOnHover: () => openOnHover,
     open: () => open,
     setOpen: (value: boolean) => {

@@ -7,14 +7,12 @@
 
   let {
     ref = $bindable(null),
-    side = "left",
     variant = "sidebar",
     collapsible = "offcanvas",
     class: className,
     children,
     ...restProps
   }: WithElementRef<HTMLAttributes<HTMLDivElement>> & {
-    side?: "left" | "right";
     variant?: "sidebar" | "floating" | "inset";
     collapsible?: "offcanvas" | "icon" | "none";
   } = $props();
@@ -45,7 +43,7 @@
       data-mobile="true"
       class="bg-sidebar text-sidebar-foreground w-(--sidebar-width) p-0 [&>button]:hidden"
       style="--sidebar-width: {SIDEBAR_WIDTH_MOBILE}"
-      {side}
+      side={sidebarState.side}
     >
       <Sheet.Header class="sr-only">
         <Sheet.Title>Sidebar</Sheet.Title>
@@ -60,11 +58,11 @@
   <div
     bind:this={ref}
     role="navigation"
-    class="text-sidebar-foreground group peer hidden md:block"
+    class={"data-[side=right]:order-last text-sidebar-foreground group peer hidden md:block"}
     data-state={sidebarState.state}
     data-collapsible={sidebarState.state === "collapsed" ? collapsible : ""}
     data-variant={variant}
-    data-side={side}
+    data-side={sidebarState.side}
     data-slot="sidebar"
     onmouseenter={() => {
       if (sidebarState.openOnHover) {
@@ -96,7 +94,7 @@
     <div
       data-slot="sidebar-container"
       class={fcd({
-        "side": side === "left"
+        "side": sidebarState.side === "left"
           ? "left-0 group-data-[collapsible=offcanvas]:left-[calc(var(--sidebar-width)*-1)]"
           : "right-0 group-data-[collapsible=offcanvas]:right-[calc(var(--sidebar-width)*-1)]",
         "transition":
@@ -109,7 +107,7 @@
             !isFloatingOrInset,
         },
         "layout":
-          "w-(--sidebar-width) fixed inset-y-0 z-10 hidden h-svh p-2 md:flex",
+          "w-(--sidebar-width)  fixed inset-y-0 z-10 hidden h-full p-2  md:flex",
       })}
       {...restProps}
     >
