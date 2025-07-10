@@ -1,6 +1,6 @@
 <script lang="ts">
   import HouseIcon from "@lucide/svelte/icons/house";
-  import InboxIcon from "@lucide/svelte/icons/inbox";
+  import SettingsIcon from "@lucide/svelte/icons/settings";
   import * as Sidebar from "$lib/components/ui/sidebar/index.js";
 
   const items = [
@@ -12,7 +12,7 @@
     {
       title: "Settings",
       url: "/settings",
-      icon: InboxIcon,
+      icon: SettingsIcon,
     },
   ];
 </script>
