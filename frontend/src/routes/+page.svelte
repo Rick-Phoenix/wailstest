@@ -33,20 +33,13 @@
     </span>
   </div>
   <h1>Wails + Svelte</h1>
-  <div class="result">{result}</div>
-  <div class="card">
-    <div class="input-box">
-      <input class="input" bind:value={name} type="text" autocomplete="off" />
-      <button class="btn" onclick={doGreet}>Greet</button>
+  <div class="flex-col-center gap-3">
+    <div>{result}</div>
+    <div class="card">
+      <div class="flex gap-3">
+        <input class="input" bind:value={name} type="text" autocomplete="off" />
+        <button class="btn" onclick={doGreet}>Greet</button>
+      </div>
     </div>
   </div>
-  <div class="footer">
-    <div><p class="text-2xl">Click on the Wails logo to learn more</p></div>
-    <div><p>{time}</p></div>
-  </div>
-  <a href="/about">Go to the about page...</a>
 </div>
-
-<style>
-  /* Put your standard CSS here */
-</style>

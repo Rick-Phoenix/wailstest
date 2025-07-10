@@ -36,7 +36,7 @@
         </Breadcrumb.List>
       </Breadcrumb.Root>
     </header>
-    <main>
+    <main class="p-5 size-full flex-center">
       {@render children?.()}
     </main>
   </Sidebar.Inset>
